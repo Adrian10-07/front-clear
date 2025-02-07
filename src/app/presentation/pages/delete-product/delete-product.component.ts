@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductRepository } from '../../../data/repositories/product.repository';
+import { DeleteProductUseCase } from '../../../domain/usecases/delete-product.usecase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,26 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-product.component.css']
 })
 export class DeleteProductComponent {
-  productName: string = ''; // ✅ Ahora usamos el nombre en lugar del ID
+  productName: string = '';
   errorMessage: string = '';
 
-  constructor(private productRepo: ProductRepository, private router: Router) {}
+  constructor(private deleteProductUseCase: DeleteProductUseCase, private router: Router) {}
 
   onDelete() {
     if (this.productName.trim() !== '') {
-      this.productRepo.delete(this.productName).subscribe({
+      this.deleteProductUseCase.execute(this.productName).subscribe({
         next: (data) => {
-          console.log(`Producto eliminado: ${data}`); // ✅ Verifica que la respuesta se imprima correctamente
+          console.log(`Producto eliminado: ${data}`);
           this.router.navigate(['/view-products']);
         },
         error: (err) => {
           console.error('Error al eliminar el producto', err);
-          this.errorMessage = `No se pudo eliminar el producto ${this.productName}. Intenta de nuevo.`;
+          this.errorMessage = `No se pudo eliminar el producto ${this.productName}.`;
         }
       });
     } else {
       this.errorMessage = 'Por favor, ingresa un nombre de producto válido.';
     }
   }
-  
 }

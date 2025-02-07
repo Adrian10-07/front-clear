@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../../core/models/product.model';
 import { ProductRepository } from '../../data/repositories/product.repository';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreateProductUseCase {
+export class DeleteProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 
-  execute(product: Product): Observable<string> {
-    return this.productRepository.create(product, { responseType: 'text' as 'json' });
+  execute(name: string): Observable<any> {
+    return this.productRepository.delete(name);
   }
 }

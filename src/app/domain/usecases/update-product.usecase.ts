@@ -6,10 +6,11 @@ import { ProductRepository } from '../../data/repositories/product.repository';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateProductUseCase {
+export class UpdateProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 
-  execute(product: Product): Observable<string> {
-    return this.productRepository.create(product, { responseType: 'text' as 'json' });
+  execute(id: number, product: Product): Observable<string> {
+    return this.productRepository.update(id, product, { responseType: 'text' as 'json' });
   }
+  
 }

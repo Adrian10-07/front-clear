@@ -1,12 +1,19 @@
 <h2>Lista de Productos</h2>
+<button (click)="onCreate()">Registrar Producto</button>
 <table>
   <tr>
     <th>ID</th>
     <th>Nombre</th>
     <th>Precio</th>
+    <th></th>
   </tr>
   <tr *ngFor="let product of products">
+    <td>{{ product.Id }}</td>
     <td>{{ product.Nombre }}</td>
     <td>{{ product.Precio | currency }}</td>
+    <td>
+      <!-- Botón para actualizar -->
+      <button (click)="onUpdate(product.Id)">Actualizar</button>
+    </td>
   </tr>
 </table>

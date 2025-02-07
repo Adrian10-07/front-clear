@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../../../core/models/product.model';
-import { ProductRepository } from '../../../data/repositories/product.repository';
+import { CreateProductUseCase } from '../../../domain/usecases/create-product.usecase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,22 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-product.component.css']
 })
 export class CreateProductComponent {
-  product: Product = { Nombre: '', Precio: 0 };
+  product: Product = { Id:0, Nombre: '', Precio: 0 };
   errorMessage: string = '';
 
-  constructor(private productRepo: ProductRepository, private router: Router) {}
+  constructor(private createProductUseCase: CreateProductUseCase, private router: Router) {}
 
   onCreate() {
-    this.productRepo.create(this.product, { responseType: 'text' as 'json' }).subscribe({
+    this.createProductUseCase.execute(this.product).subscribe({
       next: (data) => {
-        console.log('Respuesta del backend:', data);
-        this.router.navigate(['/view-products']); // Redirige a la lista de productos
+        console.log('Producto creado:', data);
+        this.router.navigate(['/view-products']);
       },
       error: (err) => {
         console.error('Error al crear el producto', err);
-        this.errorMessage = 'No se pudo crear el producto. Intenta de nuevo.';
+        this.errorMessage = 'No se pudo crear el producto.';
       }
     });
   }
-  
 }
