@@ -7,7 +7,6 @@ import { Product } from '../../core/models/product.model';
   providedIn: 'root'
 })
 export class ProductRepository {
-  // URLs para cada operación
   private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
