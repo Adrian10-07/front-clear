@@ -26,5 +26,7 @@ export class ProductListComponent implements OnInit {
   onCreate(){
     this.router.navigate([`/create-product`]);
   }
-  
+  onDelete(){
+    this.router.navigate(['/delete-product'])
+  }
 }
