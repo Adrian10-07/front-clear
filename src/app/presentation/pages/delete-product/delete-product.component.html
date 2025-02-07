@@ -1,0 +1,12 @@
+<div class="container">
+    <h2>Eliminar Producto</h2>
+    <form (ngSubmit)="onDelete()">
+      <div>
+        <label for="productName">Nombre del Producto</label>
+        <input id="productName" type="text" [(ngModel)]="productName" name="productName" required>
+      </div>
+      <button type="submit">Eliminar Producto</button>
+    </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>
+  

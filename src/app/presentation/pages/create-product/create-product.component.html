@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Crear Producto</h2>
+    <form (ngSubmit)="onCreate()">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" [(ngModel)]="product.Nombre" name="nombre" required>
+      </div>
+      <div>
+        <label for="precio">Precio</label>
+        <input id="precio" type="number" [(ngModel)]="product.Precio" name="precio" required>
+      </div>
+      <button type="submit">Crear Producto</button>
+    </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>
+  
